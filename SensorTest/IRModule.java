@@ -1,18 +1,18 @@
 
-
 import com.pi4j.io.gpio.event.*;
 import com.pi4j.io.gpio.*;
 
 public class IRModule
 {
    
-    public IRModule()
+    public IRModule(Pin pin)
     {
         System.out.println("Initialization !");
         
         final GpioController gpio = GpioFactory.getInstance();
         
-        final GpioPinDigitalInput ir = gpio.provisionDigitalInputPin(RaspiPin.GPIO_14, PinPullResistance.PULL_DOWN);
+        System.out.println("Initializing IR on pin " + pin);
+        final GpioPinDigitalInput ir = gpio.provisionDigitalInputPin(pin, PinPullResistance.PULL_DOWN);
         
         GpioPinListenerDigital listener = new GpioPinListenerDigital() {
             
