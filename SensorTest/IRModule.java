@@ -1,10 +1,5 @@
 
-/**
- * Write a description of class IRModule here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+
 import com.pi4j.io.gpio.event.*;
 import com.pi4j.io.gpio.*;
 
@@ -34,6 +29,7 @@ public class IRModule
         };
         
         ir.addListener(listener);
+        //ir.setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
         
         System.out.println("Initialization completed!");
     }

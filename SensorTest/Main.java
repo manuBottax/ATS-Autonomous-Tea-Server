@@ -1,11 +1,4 @@
 
-/**
- * Write a description of class Main here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-
 public class Main
 {
     
@@ -13,10 +6,13 @@ public class Main
         
  
         IRModule ir = new IRModule();
+        // ColorModule color = new ColorModule();
+        SerialReader reader = new SerialReader();
         
-        while(true){
-            Thread.sleep(500);
-        }
+        // while(true){
+        //     color.loop();
+        //     Thread.sleep(1000);
+        // }
         
     }
 }
