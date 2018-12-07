@@ -4,10 +4,16 @@ import com.pi4j.io.gpio.*;
 
 public class IRModule
 {
+
+    private String name;
+    private MotorController controller;
    
-    public IRModule(Pin pin)
+    public IRModule(Pin pin, String name, MotorController controller)
     {
-        System.out.println("Initialization !");
+        System.out.println("IR Module Initialization (" + name + ") !");
+
+        this.name = name;
+        this.controller = controller;
         
         final GpioController gpio = GpioFactory.getInstance();
         
@@ -19,10 +25,13 @@ public class IRModule
             @Override
             public void handleGpioPinDigitalStateChangeEvent( GpioPinDigitalStateChangeEvent event) {
                 //System.out.println(" ---> IR Sensor change : " + event.getPin() + " => " + event.getState());
+                // System.out.println("event from pin : " + event.getPin());
                 if (event.getState() == PinState.HIGH){
-                    System.out.println(" Line : true" );
+                    System.out.println("Sensor " + name + " ->  Line : Black" );
+                    controller.setLineState(name, true);
                 } else {
-                    System.out.println(" Line : false" );
+                    System.out.println("Sensor " + name + " -> Line : White" );
+                    controller.setLineState(name, false);
                 }
             }
             
@@ -31,7 +40,7 @@ public class IRModule
         ir.addListener(listener);
         //ir.setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
         
-        System.out.println("Initialization completed!");
+        System.out.println("IR Module initialization completed!");
     }
     
 

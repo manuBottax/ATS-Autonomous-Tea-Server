@@ -6,46 +6,57 @@ import com.pi4j.io.gpio.*;
 public class Main
 {
     
-    public static void main(String args[]) throws InterruptedException{        
- 
-        IRModule dx = new IRModule(RaspiPin.GPIO_14);
-        IRModule sx = new IRModule(RaspiPin.GPIO_15);
-        // SerialReader reader = new SerialReader();
+    public static void main(String args[]) throws InterruptedException{  
+
+        MotorController motorController = new MotorController();
+        
+        IRModule dx = new IRModule(RaspiPin.GPIO_15, "Dx", motorController);
+        IRModule sx = new IRModule(RaspiPin.GPIO_16, "Sx", motorController);
+
+        SerialReader reader = new SerialReader();
         Button button = new Button();
+
+        // motor.start();
         
         while(true){
 
-            System.out.println("Sto andando avanti !");
-
-            Thread.sleep(5000);
-
-            System.out.println("Sono al tavolo del cliente, aspetto !");
+            System.out.println("Waiting for a client !");
 
             while(! button.isPressed()) { Thread.sleep(100); }
 
-            System.out.println("pressed button ! He has choose his tea");
+            System.out.println("A client is arrived !");
             button.setPressed(false);
-            System.out.println("Torno indietro !");
+            System.out.println("Going to the client !");
 
-            Thread.sleep(5000);
+            Thread.sleep(15000);
 
-            System.out.println("Sono al bar, aspetto !");
+            System.out.println("At table, waiting for orders !");
+
+            while(! button.isPressed()) { Thread.sleep(100); }
+
+            System.out.println("pressed button ! The client has choose his tea");
+            button.setPressed(false);
+            System.out.println("Going to bar !");
+
+            Thread.sleep(15000);
+
+            System.out.println("At bar, waiting for preparation !");
 
             while(!button.isPressed()) { Thread.sleep(100); }
 
-            System.out.println("pressed button ! Mi hanno dato il thè");
+            System.out.println("pressed button ! they give me some tea ");
             button.setPressed(false);
-            System.out.println("Torno indietro !");
+            System.out.println("Going back to client !");
 
-            Thread.sleep(5000);
+            Thread.sleep(15000);
 
-            System.out.println("Sono dal cliente, aspetto !");
+            System.out.println("At client, waiting for him to retrieve his tea !");
 
             while(!button.isPressed()) { Thread.sleep(100); }
 
-            System.out.println("pressed button ! Mi hanno preso il thè");
+            System.out.println("pressed button ! the client receive the tea");
             button.setPressed(false);
-            System.out.println("Torno indietro a ricaricarmi !");
+            System.out.println("Coming back to start !");
         }
         
     }

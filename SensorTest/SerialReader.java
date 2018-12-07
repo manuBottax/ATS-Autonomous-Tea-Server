@@ -8,7 +8,11 @@ import java.io.IOException;
 
 public class SerialReader {
 
+    private String currentColor = "WHITE";
+
 	public SerialReader() throws InterruptedException, NumberFormatException {
+
+        //TODO: leggere i dati invece di ricevere l'evento
 
 
 		// create an instance of the serial communications class
@@ -20,10 +24,14 @@ public class SerialReader {
             @Override
             public void dataReceived(SerialDataEvent event)
             {
+                
                     String data = event.getData();
 
-                    System.out.println("Arduino dice: " + data);
-                    System.out.println();
+                        //TODOOOOOOOOOOO: FARE QUESTO FILTRO SUI COLORI IN ARDUINO
+                    if (! data.equals(currentColor)){
+                        System.out.println("Color detected: " + data);
+                        currentColor = data;
+                    }
             }            
         });
 
