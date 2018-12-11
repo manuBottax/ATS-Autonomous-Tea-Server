@@ -5,80 +5,28 @@ import com.pi4j.io.gpio.*;
 
 public class Main
 {
+
     
     public static void main(String args[]) throws InterruptedException{  
 
         MotorController motorController = new MotorController();
         
-        IRModule dx = new IRModule(RaspiPin.GPIO_15, "Dx", motorController);
-        IRModule sx = new IRModule(RaspiPin.GPIO_16, "Sx", motorController);
-
-        Motor rightWheel = new Motor("right");
-        Motor leftWheel = new Motor("left");
+        // IRModule dx = new IRModule(RaspiPin.GPIO_15, "Dx", motorController);
+        // IRModule sx = new IRModule(RaspiPin.GPIO_16, "Sx", motorController);
 
         SerialReader reader = new SerialReader();
         Button button = new Button();
+
+        Sonar sonar = new Sonar();
+
+        // motorController.start();
         
         while(true){
 
-            System.out.println("Wheel test 1 !");
+            Thread.sleep(50);
 
-            System.out.println("Going Forward ! ");
-
-            rightWheel.forward();
-            leftWheel.forward();
-
-            Thread.sleep(5000);
-
-            System.out.println("stop ! ");
-
-            rightWheel.brake();
-            leftWheel.brake();
-
-            Thread.sleep(3000);
-
-            System.out.println("Going Backward ! ");
-
-            rightWheel.backward();
-            leftWheel.backward();
-            Thread.sleep(5000);
-
-            System.out.println("turning left ! ");
-
-            rightWheel.brake();
-            leftWheel.brake();
-            Thread.sleep(1000);
-            rightWheel.forward();
-            leftWheel.backward();
-            Thread.sleep(5000);
-
-            System.out.println("turning right ! ");
-
-            rightWheel.brake();
-            leftWheel.brake();
-            Thread.sleep(1000);
-            rightWheel.backward();
-            leftWheel.forward();
-            Thread.sleep(5000);
-
-            System.out.println("going left ! ");
-
-            rightWheel.brake();
-            leftWheel.brake();
-            Thread.sleep(1000);
-            rightWheel.forward();
-            leftWheel.brake();
-            Thread.sleep(5000);
-
-
-            System.out.println("going right ! ");
-
-            rightWheel.brake();
-            leftWheel.brake();
-            Thread.sleep(1000);
-            rightWheel.brake();
-            leftWheel.forward();
-            Thread.sleep(5000);
+           
+            System.out.println( sonar.measureDistance() );
 
             // System.out.println("Waiting for a client !");
 
@@ -117,6 +65,7 @@ public class Main
             // System.out.println("pressed button ! the client receive the tea");
             // button.setPressed(false);
             // System.out.println("Coming back to start !");
+            
         }
         
     }
