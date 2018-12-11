@@ -24,14 +24,13 @@ public class SerialReader {
             @Override
             public void dataReceived(SerialDataEvent event)
             {
-                
                     String data = event.getData();
-
-                        //TODOOOOOOOOOOO: FARE QUESTO FILTRO SUI COLORI IN ARDUINO
-                    if (! data.equals(currentColor)){
-                        System.out.println("Color detected: " + data);
-                        currentColor = data;
-                    }
+                    // if (! data.equals(currentColor)){
+                    //     System.out.println("Color detected: " + data);
+                    //     currentColor = data;
+                    // }
+                    System.out.println("Color detected: " + data);
+                    this.currentColor = data;
             }            
         });
 
@@ -51,4 +50,8 @@ public class SerialReader {
 			return;
 		}
 	}
+
+    public String getLastColor() {
+        return this.currentColor;
+    }
 }

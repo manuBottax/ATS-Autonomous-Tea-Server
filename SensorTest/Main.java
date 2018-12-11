@@ -1,30 +1,22 @@
-
-
 import com.pi4j.io.gpio.*;
-
+import hardware_management.*;
 
 public class Main
 {
-
     
     public static void main(String args[]) throws InterruptedException{  
 
-        MotorController motorController = new MotorController();
-        
-        // IRModule dx = new IRModule(RaspiPin.GPIO_15, "Dx", motorController);
-        // IRModule sx = new IRModule(RaspiPin.GPIO_16, "Sx", motorController);
-
-        SerialReader reader = new SerialReader();
         Button button = new Button();
 
         Sonar sonar = new Sonar();
 
-        // motorController.start();
+        MotorController motorController = new MotorController();
+        FollowPathController followPathController = new FollowPathController(motorController);
+
+        followPathController.start();
         
         while(true){
-
             Thread.sleep(50);
-
            
             System.out.println( sonar.measureDistance() );
 

@@ -5,15 +5,15 @@ import com.pi4j.io.gpio.*;
 public class IRModule
 {
 
-    private String name;
-    private MotorController controller;
+    private Directions direction;
+    private FollowPathController followPathController;
    
-    public IRModule(Pin pin, String name, MotorController controller)
+    public IRModule(Pin pin, Directions direction, FollowPathController controller)
     {
-        System.out.println("IR Module Initialization (" + name + ") !");
+        System.out.println("IR Module Initialization (" + name.getDirection() + ") !");
 
-        this.name = name;
-        this.controller = controller;
+        this.direction = direction;
+        this.followPathController = controller;
         
         final GpioController gpio = GpioFactory.getInstance();
         
@@ -27,11 +27,11 @@ public class IRModule
                 //System.out.println(" ---> IR Sensor change : " + event.getPin() + " => " + event.getState());
                 // System.out.println("event from pin : " + event.getPin());
                 if (event.getState() == PinState.HIGH){
-                    System.out.println("Sensor " + name + " ->  Line : Black" );
-                    controller.setLineState(name, true);
+                    System.out.println("Sensor " + direction.getDirection() + " ->  Line : Black" );
+                    followPathController.setLineState(direction, true);
                 } else {
-                    System.out.println("Sensor " + name + " -> Line : White" );
-                    controller.setLineState(name, false);
+                    System.out.println("Sensor " + direction.getDirection() + " -> Line : White" );
+                    followPathController.setLineState(direction, false);
                 }
             }
             
@@ -42,6 +42,4 @@ public class IRModule
         
         System.out.println("IR Module initialization completed!");
     }
-    
-
 }
