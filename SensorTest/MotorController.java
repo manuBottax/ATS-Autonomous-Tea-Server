@@ -1,9 +1,5 @@
 public class MotorController
 {
-
-    private boolean isRightSensorDetectingBlack;
-    private boolean isLeftSensorDetectingBlack;
-
     Motor rightWheel = new Motor("right");
     Motor leftWheel = new Motor("left");
    

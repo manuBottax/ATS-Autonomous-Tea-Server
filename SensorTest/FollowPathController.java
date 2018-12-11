@@ -1,3 +1,5 @@
+import com.pi4j.io.gpio.RaspiPin;
+
 public class FollowPathController
 {
 
@@ -5,11 +7,14 @@ public class FollowPathController
     private IRModule irRight;
     private IRModule irLeft;
 
+    private boolean isRightSensorDetectingBlack;
+    private boolean isLeftSensorDetectingBlack;
+
     public FollowPathController(MotorController motorContr) 
     {
         this.motorController = motorContr;
-        this.irRight = new IRModule(RaspiPin.GPIO_15, Directions.RIGHT, this.motorController);
-        this.irLeft = new IRModule(RaspiPin.GPIO_16, Directions.LEFT, this.motorController);
+        this.irRight = new IRModule(RaspiPin.GPIO_15, Directions.RIGHT, this);
+        this.irLeft = new IRModule(RaspiPin.GPIO_16, Directions.LEFT, this);
     }
 
     public void start() {

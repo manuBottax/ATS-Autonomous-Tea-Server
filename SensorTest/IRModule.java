@@ -10,7 +10,7 @@ public class IRModule
    
     public IRModule(Pin pin, Directions direction, FollowPathController controller)
     {
-        System.out.println("IR Module Initialization (" + name.getDirection() + ") !");
+        System.out.println("IR Module Initialization (" + direction.getDirection() + ") !");
 
         this.direction = direction;
         this.followPathController = controller;
