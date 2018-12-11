@@ -6,14 +6,8 @@ public class Main
     
     public static void main(String args[]) throws InterruptedException{  
 
-        Button button = new Button();
-
         Sonar sonar = new Sonar();
-
-        MotorController motorController = new MotorController();
-        FollowPathController followPathController = new FollowPathController(motorController);
-
-        followPathController.start();
+        BehaviourHandler behaviourHandler = new BehaviourHandler();
         
         while(true){
             Thread.sleep(50);
