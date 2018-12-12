@@ -10,7 +10,7 @@ public class SerialReader {
 
     private String currentColor = "WHITE";
 
-	public SerialReader() throws InterruptedException, NumberFormatException {
+	public SerialReader() {
 
         //TODO: leggere i dati invece di ricevere l'evento
 
@@ -30,7 +30,7 @@ public class SerialReader {
                     //     currentColor = data;
                     // }
                     System.out.println("Color detected: " + data);
-                    this.currentColor = data;
+                    currentColor = data;
             }            
         });
 

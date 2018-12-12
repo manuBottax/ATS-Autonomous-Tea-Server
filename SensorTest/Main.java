@@ -6,13 +6,15 @@ public class Main
     
     public static void main(String args[]) throws InterruptedException{  
 
-        Sonar sonar = new Sonar();
+        // Sonar sonar = new Sonar();
         BehaviourHandler behaviourHandler = new BehaviourHandler();
+
+        behaviourHandler.serveTea();
         
         while(true){
             Thread.sleep(50);
            
-            System.out.println( sonar.measureDistance() );
+            // System.out.println( sonar.measureDistance() );
 
             // System.out.println("Waiting for a client !");
 

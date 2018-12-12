@@ -30,8 +30,8 @@ public class MotorController
 
     public void turnRight() {
         System.out.println(" Going Right ! ");
-        rightWheel.brake();
         leftWheel.forward();
+        rightWheel.brake();
         this.isRobotArrested = false;
     }
 

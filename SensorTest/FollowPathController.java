@@ -10,16 +10,27 @@ public class FollowPathController
     private boolean isRightSensorDetectingBlack;
     private boolean isLeftSensorDetectingBlack;
 
+    private boolean started;
+
     public FollowPathController(MotorController motorContr) 
     {
         this.motorController = motorContr;
         this.irRight = new IRModule(RaspiPin.GPIO_15, Directions.RIGHT, this);
         this.irLeft = new IRModule(RaspiPin.GPIO_16, Directions.LEFT, this);
+
+        this.started = false;
     }
 
     public void start() {
         this.motorController.goForward();
+        this.started = true;
     }
+
+    public void stop() {
+        this.motorController.stop();
+        this.started = false;
+    }
+
 
     public void setLineState(Directions dir, boolean isBlack){
         if (dir == Directions.RIGHT) {
@@ -43,14 +54,16 @@ public class FollowPathController
     // } 
 
     private void checkStatus() {
-        if (this.isRightSensorDetectingBlack && this.isLeftSensorDetectingBlack ){
-            this.motorController.stop();
-        } else if ( this.isLeftSensorDetectingBlack) {
-            this.motorController.turnLeft();
-        } else if ( this.isRightSensorDetectingBlack) {
-            this.motorController.turnRight();
-        } else {
-            this.motorController.goForward();
+        if(this.started){
+            if (this.isRightSensorDetectingBlack && this.isLeftSensorDetectingBlack ){
+                this.motorController.stop();
+            } else if ( this.isLeftSensorDetectingBlack) {
+                this.motorController.turnLeft();
+            } else if ( this.isRightSensorDetectingBlack) {
+                this.motorController.turnRight();
+            } else {
+                this.motorController.goForward();
+            }
         }
     } 
 
