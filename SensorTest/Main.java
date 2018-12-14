@@ -7,12 +7,21 @@ public class Main
     public static void main(String args[]) throws InterruptedException{  
 
         // Sonar sonar = new Sonar();
-        BehaviourHandler behaviourHandler = new BehaviourHandler();
+        // BehaviourHandler behaviourHandler = new BehaviourHandler();
+         ChargeController controller = new ChargeController();
+         LocationController location = new LocationController();
 
-        behaviourHandler.serveTea();
+        // behaviourHandler.serveTea();
+
+        while (! location.getLocation().equals("CHARGE STATION")){   
+            System.out.println("Robot cannot start outside charge station");     
+        }
+
+        controller.start();
         
         while(true){
-            Thread.sleep(50);
+                   
+            Thread.sleep(30);
            
             // System.out.println( sonar.measureDistance() );
 

@@ -18,7 +18,7 @@ public class FollowPathController
         this.irRight = new IRModule(RaspiPin.GPIO_15, Directions.RIGHT, this);
         this.irLeft = new IRModule(RaspiPin.GPIO_16, Directions.LEFT, this);
 
-        this.started = false;
+        // this.started = false;
     }
 
     public void start() {
@@ -27,8 +27,10 @@ public class FollowPathController
     }
 
     public void stop() {
+        System.out.println("Stopping the robot.");
         this.motorController.stop();
         this.started = false;
+
     }
 
 
@@ -54,9 +56,10 @@ public class FollowPathController
     // } 
 
     private void checkStatus() {
+        // System.out.println("Started ? " + this.started);
         if(this.started){
             if (this.isRightSensorDetectingBlack && this.isLeftSensorDetectingBlack ){
-                this.motorController.stop();
+                this.stop();
             } else if ( this.isLeftSensorDetectingBlack) {
                 this.motorController.turnLeft();
             } else if ( this.isRightSensorDetectingBlack) {

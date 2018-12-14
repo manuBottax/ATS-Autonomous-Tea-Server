@@ -22,24 +22,28 @@ public class MotorController
     }
 
     public void turnLeft() {
-        System.out.println(" Going Left ! ");
-        rightWheel.forward();
-        leftWheel.brake();
-        this.isRobotArrested = false;
+        if (! this.isRobotArrested) {
+            System.out.println(" Going Left ! ");
+            rightWheel.forward();
+            leftWheel.brake();
+        }
+        // this.isRobotArrested = false;
     }
 
     public void turnRight() {
-        System.out.println(" Going Right ! ");
-        leftWheel.forward();
-        rightWheel.brake();
-        this.isRobotArrested = false;
+        if (! this.isRobotArrested) {
+            System.out.println(" Going Right ! ");
+            leftWheel.forward();
+            rightWheel.brake();
+        }
+        // this.isRobotArrested = false;
     }
 
     public void stop() {
+        this.isRobotArrested = true;
         System.out.println(" Stop ! ");
         rightWheel.brake();
         leftWheel.brake();
-        this.isRobotArrested = true;
     }
 
     public Boolean isRobotArrested() {

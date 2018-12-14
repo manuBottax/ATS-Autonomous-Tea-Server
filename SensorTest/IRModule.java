@@ -27,10 +27,10 @@ public class IRModule
                 //System.out.println(" ---> IR Sensor change : " + event.getPin() + " => " + event.getState());
                 // System.out.println("event from pin : " + event.getPin());
                 if (event.getState() == PinState.HIGH){
-                    System.out.println("Sensor " + direction.getDirection() + " ->  Line : Black" );
+                    // System.out.println("Sensor " + direction.getDirection() + " ->  Line : Black" );
                     followPathController.setLineState(direction, true);
                 } else {
-                    System.out.println("Sensor " + direction.getDirection() + " -> Line : White" );
+                    // System.out.println("Sensor " + direction.getDirection() + " -> Line : White" );
                     followPathController.setLineState(direction, false);
                 }
             }

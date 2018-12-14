@@ -25,12 +25,12 @@ public class SerialReader {
             public void dataReceived(SerialDataEvent event)
             {
                     String data = event.getData();
-                    // if (! data.equals(currentColor)){
-                    //     System.out.println("Color detected: " + data);
-                    //     currentColor = data;
-                    // }
-                    System.out.println("Color detected: " + data);
-                    currentColor = data;
+                    if (! data.equals(currentColor)){
+                        System.out.println("Color detected: " + data);
+                        currentColor = data;
+                    }
+                    // System.out.println("Color detected: " + data);
+                    // currentColor = data;
             }            
         });
 
@@ -52,6 +52,15 @@ public class SerialReader {
 	}
 
     public String getLastColor() {
+        this.currentColor = null;
+        // while( this.currentColor == null || this.currentColor == "") {
+            while( this.currentColor == null) {
+            // System.out.println("Undetected color, wait ...");
+            try {
+                Thread.sleep(100);
+            } catch( InterruptedException ex) { }
+            
+        }
         return this.currentColor;
     }
 }
