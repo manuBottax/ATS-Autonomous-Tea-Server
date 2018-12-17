@@ -8,7 +8,7 @@ public class Main
 
         // Sonar sonar = new Sonar();
         // BehaviourHandler behaviourHandler = new BehaviourHandler();
-         ChargeController controller = new ChargeController();
+         
          LocationController location = new LocationController();
 
         // behaviourHandler.serveTea();
@@ -16,6 +16,10 @@ public class Main
         while (! location.getLocation().equals("CHARGE STATION")){   
             System.out.println("Robot cannot start outside charge station");     
         }
+
+        BehaviourHandler behaviour = new BehaviourHandler(location);
+
+        ChargeController controller = new ChargeController(behaviour);
 
         controller.start();
         

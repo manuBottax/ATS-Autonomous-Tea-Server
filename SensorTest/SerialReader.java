@@ -12,8 +12,6 @@ public class SerialReader {
 
 	public SerialReader() {
 
-        //TODO: leggere i dati invece di ricevere l'evento
-
 
 		// create an instance of the serial communications class
 		final Serial serial = SerialFactory.createInstance();

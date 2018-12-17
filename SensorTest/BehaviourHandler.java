@@ -1,15 +1,20 @@
 public class BehaviourHandler
 {
 
-    private LocationController locationController = new LocationController();
-    private MotorController motorController = new MotorController();
-    private FollowPathController followPathController = new FollowPathController(this.motorController);
+    private LocationController locationController;
+    // private MotorController motorController = new MotorController();
+    // private FollowPathController followPathController = new FollowPathController();
+    private ObstacleAvoidanceController obstacleController;
     private Button button = new Button();
 
     private String location;
     private int attempt = 0;
    
-    public BehaviourHandler () {}
+    public BehaviourHandler (LocationController l) {
+        this.locationController = l;
+        this.obstacleController = new ObstacleAvoidanceController();
+        this.obstacleController.start();
+    }
 
     //TODO prima di richiamare questo metodo controllare che ci sia abbastanza carica per fare tutto
     public void serveTea() {
@@ -90,15 +95,15 @@ public class BehaviourHandler
         
         System.out.println("Going to client...");
         this.attempt = 0;
-        this.followPathController.start();
+        this.obstacleController.startMoving();
         // System.out.println("isArrested :" + this.motorController.isRobotArrested());
-        while(!this.motorController.isRobotArrested()) { 
+        while(this.obstacleController.isStarted()) { 
             try {
                 // System.out.println("now isArrested ? " + this.motorController.isRobotArrested());
                 Thread.sleep(100); 
             } catch (InterruptedException ex) {} 
         }
-        System.out.println("now isArrested ? " + this.motorController.isRobotArrested());
+        System.out.println("now isArrested ? " + ! this.obstacleController.isStarted());
         this.location = this.locationController.getLocation();
         System.out.println("location :" + this.location);
         // System.out.println("getLocation :" + this.locationController.getLocation());
@@ -148,8 +153,8 @@ public class BehaviourHandler
         
         System.out.println("Going to bar...");
         this.attempt = 0;
-        this.followPathController.start();
-        while(!this.motorController.isRobotArrested()) { 
+        this.obstacleController.startMoving();
+        while(this.obstacleController.isStarted()) { 
             try {
                 Thread.sleep(100); 
             } catch (InterruptedException ex) {} 
@@ -171,8 +176,8 @@ public class BehaviourHandler
         
         System.out.println("Going to charge station...");
         this.attempt = 0;
-        this.followPathController.start();
-        while(!this.motorController.isRobotArrested()) { 
+        this.obstacleController.startMoving();
+        while(this.obstacleController.isStarted()) { 
             try {
                 Thread.sleep(100); 
             } catch (InterruptedException ex) {} 

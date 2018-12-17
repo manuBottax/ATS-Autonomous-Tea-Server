@@ -1,36 +1,59 @@
 import com.pi4j.io.gpio.RaspiPin;
 
+
 public class FollowPathController
 {
+
+    
 
     private MotorController motorController;
     private IRModule irRight;
     private IRModule irLeft;
 
-    private boolean isRightSensorDetectingBlack;
-    private boolean isLeftSensorDetectingBlack;
+    private boolean isRightSensorDetectingBlack = false;
+    private boolean isLeftSensorDetectingBlack = false;
 
     private boolean started;
+    private boolean hasObstacle;
 
-    public FollowPathController(MotorController motorContr) 
+    public FollowPathController() 
     {
-        this.motorController = motorContr;
+        this.motorController = new MotorController();
         this.irRight = new IRModule(RaspiPin.GPIO_15, Directions.RIGHT, this);
         this.irLeft = new IRModule(RaspiPin.GPIO_16, Directions.LEFT, this);
 
+
+
         // this.started = false;
+        this.hasObstacle = false;
+    }
+
+    public void updateObstacleState(boolean hasObstacle) {
+        // System.out.println("sono in update obstacle. C'è un ostacolo? " + hasObstacle);
+        this.hasObstacle = hasObstacle;
+        if (this.hasObstacle) {
+            this.waitObstacle();
+        } else { 
+            this.checkStatus();
+        } 
     }
 
     public void start() {
-        this.motorController.goForward();
-        this.started = true;
+        if ( ! this.hasObstacle){
+            this.motorController.goForward();
+            this.started = true;
+        } 
     }
 
     public void stop() {
         System.out.println("Stopping the robot.");
         this.motorController.stop();
         this.started = false;
+    }
 
+    public void waitObstacle() {
+        System.out.println("Waiting for obstacle removing ");
+        this.motorController.stop();
     }
 
 
@@ -57,7 +80,7 @@ public class FollowPathController
 
     private void checkStatus() {
         // System.out.println("Started ? " + this.started);
-        if(this.started){
+        if(this.started && ! this.hasObstacle){
             if (this.isRightSensorDetectingBlack && this.isLeftSensorDetectingBlack ){
                 this.stop();
             } else if ( this.isLeftSensorDetectingBlack) {
@@ -69,5 +92,9 @@ public class FollowPathController
             }
         }
     } 
+
+    public boolean isStarted() {
+        return this.started;
+    }
 
 }
