@@ -25,7 +25,7 @@ public class ObstacleAvoidanceController extends Thread{
                     pathController.updateObstacleState(this.obstacle);
                 }
 
-                Thread.sleep(300);
+                Thread.sleep(500);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
