@@ -116,7 +116,7 @@ public class BehaviourHandler
                 checkLocation();
                 
                 // System.out.println("ho finito la checklocation");
-                System.out.println(this.attempt);
+                // System.out.println(this.attempt);
                 if ( this.attempt >= 2){
                     
                     // System.out.println("Sono dentro all'if");

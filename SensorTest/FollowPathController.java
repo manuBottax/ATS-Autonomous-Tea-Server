@@ -21,6 +21,8 @@ public class FollowPathController
         this.motorController = new MotorController();
         this.irRight = new IRModule(RaspiPin.GPIO_15, Directions.RIGHT, this);
         this.irLeft = new IRModule(RaspiPin.GPIO_16, Directions.LEFT, this);
+        // this.irRight.start();
+        // this.irLeft.start();
 
 
 

@@ -1,9 +1,6 @@
 
 import com.pi4j.io.gpio.event.*;
 
-import java.sql.Date;
-import java.util.Calendar;
-
 import com.pi4j.io.gpio.*;
 
 public class IRModule
@@ -33,45 +30,46 @@ public class IRModule
                 //System.out.println(" ---> IR Sensor change : " + event.getPin() + " => " + event.getState());
                 // System.out.println("event from pin : " + event.getPin());
 
-                
-                if (event.getState() == PinState.HIGH){
-                    System.out.println("c'è del nero");
-                    blackOccurance++;
-                    for ( int i = 0; i < 4; i ++) {
-                        try {
-                            Thread.sleep(10);
-                            if (ir.isHigh()){
-                                blackOccurance++;
-                            }
-                        } catch ( InterruptedException ex) {}
-                    }
-
-                    if ( blackOccurance >= 3) {
-                        System.out.print("Black Occurence : " + blackOccurance + " | ");
-                        System.out.println("Sensor " + direction.getDirection() + " ->  Line : Black" );
-                        followPathController.setLineState(direction, true);
+                synchronized(this){
+                    if (event.getState() == PinState.HIGH){
+                        System.out.println(direction.getDirection() + " c'è del nero");
+                        blackOccurance++;
+                        for ( int i = 0; i < 2; i ++) {
+                            try {
+                                Thread.sleep(10);
+                                if (ir.isHigh()){
+                                    blackOccurance++;
+                                }
+                            } catch ( InterruptedException ex) {}
+                        }
+    
+                        if ( blackOccurance >= 2) {
+                            System.out.print("Black Occurence : " + blackOccurance + " | ");
+                            System.out.println("Sensor " + direction.getDirection() + " ->  Line : Black" );
+                            followPathController.setLineState(direction, true);
+                            
+                        } else {
+                            System.out.println(  direction.getDirection() + " : Mi sono inventato del nero che non c'è ");
+                        }
+    
+                        blackOccurance = 0;
+    
+    
+                        // if(firstBlack == 0) {
+                        //     firstBlack = System.currentTimeMillis();
+                        // }
+                        
+                        
+                        // long now = System.currentTimeMillis();
+                        // if((firstBlack + 500) <= now)
                         
                     } else {
-                        System.out.println(  direction.getDirection() + " : Mi sono inventato del nero che non c'è ");
+                        System.out.println("Sensor " + direction.getDirection() + " -> Line : White" );
+                        followPathController.setLineState(direction, false);
                     }
-
-                    blackOccurance = 0;
-
-
-                    // if(firstBlack == 0) {
-                    //     firstBlack = System.currentTimeMillis();
-                    // }
-                    
-                    
-                    // long now = System.currentTimeMillis();
-                    // if((firstBlack + 500) <= now)
-                    
-                } else {
-                    System.out.println("Sensor " + direction.getDirection() + " -> Line : White" );
-                    followPathController.setLineState(direction, false);
-                }
+                }   
+                 
             }
-            
         };
         
         ir.addListener(listener);

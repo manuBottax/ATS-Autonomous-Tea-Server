@@ -3,7 +3,7 @@ import java.io.InterruptedIOException;
 
 public class ObstacleAvoidanceController extends Thread{
 
-    private static final int MIN_DISTANCE_ALLOWED = 10;
+    private static final int MIN_DISTANCE_ALLOWED = 15;
     private boolean obstacle = false;
     private Sonar sonar;
     private FollowPathController pathController;
