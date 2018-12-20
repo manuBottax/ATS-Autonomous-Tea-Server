@@ -17,7 +17,7 @@ public class BehaviourHandler
     }
 
     //TODO prima di richiamare questo metodo controllare che ci sia abbastanza carica per fare tutto
-    public void serveTea() {
+    public boolean serveTea() {
         try {
             //mettere lo stop in FollowPathController
             // this.followPathController.stop();
@@ -86,8 +86,11 @@ public class BehaviourHandler
             System.out.println("Going to wait for a new client !");
             goingToTheChargeStation();
 
+            return true;
+
         } catch(InterruptedException e) {
             System.err.println("InterruptException detected : " + e);
+            return false;
         }
     }
 

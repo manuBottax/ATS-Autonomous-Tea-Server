@@ -24,6 +24,8 @@ public class Main
         controller.start();
         
         while(true){
+
+            // controller.start();
                    
             Thread.sleep(30);
            
