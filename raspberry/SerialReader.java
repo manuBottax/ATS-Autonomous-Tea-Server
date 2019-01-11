@@ -12,7 +12,6 @@ public class SerialReader {
 
 	public SerialReader() {
 
-
 		// create an instance of the serial communications class
 		final Serial serial = SerialFactory.createInstance();
 
@@ -27,13 +26,10 @@ public class SerialReader {
                         System.out.println("Color detected: " + data);
                         currentColor = data;
                     }
-                    // System.out.println("Color detected: " + data);
-                    // currentColor = data;
             }            
         });
 
 		try {
-
             // open the default serial port provided on the GPIO header
             String port = "/dev/ttyACM0";
             int br = 9600;
@@ -51,13 +47,11 @@ public class SerialReader {
 
     public String getLastColor() {
         this.currentColor = null;
-        // while( this.currentColor == null || this.currentColor == "") {
-            while( this.currentColor == null) {
-            // System.out.println("Undetected color, wait ...");
+
+        while( this.currentColor == null) {
             try {
                 Thread.sleep(100);
             } catch( InterruptedException ex) { }
-            
         }
         return this.currentColor;
     }

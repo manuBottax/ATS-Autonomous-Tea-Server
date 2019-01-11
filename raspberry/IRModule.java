@@ -30,9 +30,6 @@ public class IRModule
             
             @Override
             public void handleGpioPinDigitalStateChangeEvent( GpioPinDigitalStateChangeEvent event) {
-                //System.out.println(" ---> IR Sensor change : " + event.getPin() + " => " + event.getState());
-                // System.out.println("event from pin : " + event.getPin());
-
                 
                 if (event.getState() == PinState.HIGH){
                     System.out.println("c'è del nero");
@@ -56,15 +53,6 @@ public class IRModule
                     }
 
                     blackOccurance = 0;
-
-
-                    // if(firstBlack == 0) {
-                    //     firstBlack = System.currentTimeMillis();
-                    // }
-                    
-                    
-                    // long now = System.currentTimeMillis();
-                    // if((firstBlack + 500) <= now)
                     
                 } else {
                     System.out.println("Sensor " + direction.getDirection() + " -> Line : White" );
@@ -75,7 +63,6 @@ public class IRModule
         };
         
         ir.addListener(listener);
-        //ir.setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
         
         System.out.println("IR Module initialization completed!");
     }

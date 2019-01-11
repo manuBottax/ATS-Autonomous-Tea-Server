@@ -36,7 +36,6 @@ public class MotorController
             rightWheel.forward();
             leftWheel.brake();
         }
-        // this.isRobotArrested = false;
     }
 
     public void turnRight() {
@@ -46,7 +45,6 @@ public class MotorController
             leftWheel.forward();
             rightWheel.brake();
         }
-        // this.isRobotArrested = false;
     }
 
     public void stop() {

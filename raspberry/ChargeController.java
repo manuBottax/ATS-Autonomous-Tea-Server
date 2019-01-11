@@ -1,6 +1,7 @@
 
 public class ChargeController {
 
+    // the amount of charge required to complete a service;
     private static final int MIN_CHARGE_REQUIRED = 50;
     private int charge_available;
 
@@ -8,7 +9,7 @@ public class ChargeController {
 
     public ChargeController(BehaviourHandler behaviour) {
         this.behaviour = behaviour;
-        // starting charge are casual, between 50 and 100;
+        // starting charge are random, between 50 and 100;
         this.charge_available = (int)(Math.random() * 50 ) + 50;
         System.out.println("Available Charge: " + this.charge_available );
     }
@@ -18,6 +19,7 @@ public class ChargeController {
         if (this.charge_available > MIN_CHARGE_REQUIRED){
             this.behaviour.serveTea();
         } else {
+            System.out.println("Cannot start : Not enough charge !");
             charge();
         }
 
@@ -37,7 +39,8 @@ public class ChargeController {
         
         this.charge_available += 50;
 
-        System.out.print("Charging completed !");
+        System.out.println("");
+        System.out.println("Charging completed !");
 
         start();
         

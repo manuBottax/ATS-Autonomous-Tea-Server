@@ -4,8 +4,6 @@ import com.pi4j.io.gpio.RaspiPin;
 public class FollowPathController
 {
 
-    
-
     private MotorController motorController;
     private IRModule irRight;
     private IRModule irLeft;
@@ -22,14 +20,11 @@ public class FollowPathController
         this.irRight = new IRModule(RaspiPin.GPIO_15, Directions.RIGHT, this);
         this.irLeft = new IRModule(RaspiPin.GPIO_16, Directions.LEFT, this);
 
-
-
-        // this.started = false;
         this.hasObstacle = false;
     }
 
     public void updateObstacleState(boolean hasObstacle) {
-        // System.out.println("sono in update obstacle. C'è un ostacolo? " + hasObstacle);
+
         this.hasObstacle = hasObstacle;
         if (this.hasObstacle) {
             this.waitObstacle();
@@ -66,20 +61,8 @@ public class FollowPathController
         this.checkStatus();
     }
 
-    // private void checkStatus() {
-    //     if ( this.isRightSensorDetectingBlack && this.isLeftSensorDetectingBlack ){
-    //         this.motorController.stop();
-    //     } else if ( this.isLeftSensorDetectingBlack) {
-    //         this.motorController.turnRight();
-    //     } else if ( this.isDisRightSensorDetectingBlackxBlack) {
-    //         this.motorController.turnLeft();
-    //     } else {
-    //         this.motorController.goForward();
-    //     }
-    // } 
-
     private void checkStatus() {
-        // System.out.println("Started ? " + this.started);
+        
         if(this.started && ! this.hasObstacle){
             if (this.isRightSensorDetectingBlack && this.isLeftSensorDetectingBlack ){
                 this.stop();

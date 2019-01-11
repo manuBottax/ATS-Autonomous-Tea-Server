@@ -27,25 +27,16 @@ public class Button
         final GpioPinDigitalInput button = gpio.provisionDigitalInputPin(RaspiPin.GPIO_29, PinPullResistance.PULL_DOWN);
         button.setDebounce(250);
 
-        // Add a listener to the button
         button.addListener(new GpioPinListenerDigital() {
-        @Override
-        public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
+            @Override
+            public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
 
-            if(event.getState().isLow()) {
-                setPressed(true);
-                // When Button is not pressed
-                // GPIOTest.print(event.getPin() + ", pressed");
-
+                // if (button is pressed)
+                if(event.getState().isLow()) {
+                    setPressed(true);
+                }
             }
-        }
-    });
-        // button.addTrigger(new GpioCallbackTrigger(new Callable<Void>() {
-        //     public Void call() throws Exception {
-        //         setPressed(true);
-        //         return null;
-        //     }
-        // }));
+        });
         
         System.out.println("Button Initialization completed!");
     }
