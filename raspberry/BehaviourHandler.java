@@ -90,7 +90,6 @@ public class BehaviourHandler
     }
 
     private void goingToTheClient() {
-        
         System.out.println("Going to client...");
         this.attempt = 0;
         this.obstacleController.startMoving();
@@ -120,9 +119,7 @@ public class BehaviourHandler
     }
 
     private void checkLocation() {
-
         System.out.println("Attempt : " + this.attempt);
-
         if ( this.attempt < 2) {
             try{
                 Thread.sleep(500);
@@ -136,7 +133,6 @@ public class BehaviourHandler
     }
 
     private void goingToTheBar() {
-        
         System.out.println("Going to bar...");
         this.attempt = 0;
         this.obstacleController.startMoving();
@@ -159,7 +155,6 @@ public class BehaviourHandler
     }
 
     private void goingToTheChargeStation() {
-        
         System.out.println("Going to charge station...");
         this.attempt = 0;
         this.obstacleController.startMoving();

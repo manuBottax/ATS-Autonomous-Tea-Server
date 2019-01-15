@@ -31,7 +31,6 @@ public class Button
             @Override
             public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
 
-                // if (button is pressed)
                 if(event.getState().isLow()) {
                     setPressed(true);
                 }

@@ -3,7 +3,7 @@ public class LocationController
 
     private SerialReader serialReader = new SerialReader();
    
-    public LocationController () {}
+    public LocationController() {}
 
     public String getLocation() {
         String color = this.serialReader.getLastColor();

@@ -18,11 +18,9 @@ public class Main
 
         controller.start();
         
-        // while(true){
-                   
-        //     Thread.sleep(30);
-            
-        // }
+        while(true){
+            Thread.sleep(30);   
+        }
         
     }
 }

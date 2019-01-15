@@ -17,14 +17,11 @@ public class ObstacleAvoidanceController extends Thread{
     public void run() {
         try {
             while (true) {
-
                 boolean obs = hasObstacle();
-                
                 if ( this.obstacle != obs) { 
                     this.obstacle = obs;
                     pathController.updateObstacleState(this.obstacle);
                 }
-
                 Thread.sleep(500);
             }
         } catch (InterruptedException e) {
