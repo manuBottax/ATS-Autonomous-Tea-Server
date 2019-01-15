@@ -34,12 +34,10 @@ public class ObstacleAvoidanceController extends Thread{
 
     private boolean hasObstacle() {
         float distance = this.sonar.measureDistance(); 
-        // System.out.println("Obstacle Distance : " + distance);
         if (distance <= MIN_DISTANCE_ALLOWED ) {
             System.out.println("Obstacle, stop ! ");
             return true;
         } else {
-            // System.out.println("No obstacle, can go on ");
             return false;
         }
     }

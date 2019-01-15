@@ -3,6 +3,7 @@ const int s1 = 9;
 const int s2 = 12;  
 const int s3 = 11;  
 const int out = 10;   
+
 // values
 int red = 0;  
 int green = 0;  
@@ -25,16 +26,7 @@ void setup()
 void loop() 
 {  
   color();
-  //Serial.println("RED");  
-  //Serial.println(red, DEC);  
-  //Serial.println(" GREEN ");  
-  //Serial.println(green, DEC);  
-  //Serial.println(" BLUE ");  
-  //Serial.println(blue, DEC);  
-
-  // && red < 3000
-
-  //todo: set valori minimi per stabilire i colori
+  
   if (red < blue && red < green)
   {  
     if (red <=2000 && green <=2000 && blue <=2000){ 
@@ -70,6 +62,7 @@ void loop()
   delay(3000);
 }
 
+//read RGB values from sensor
 void color()  
 {    
   digitalWrite(s2, LOW);  

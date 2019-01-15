@@ -2,8 +2,6 @@ public class BehaviourHandler
 {
 
     private LocationController locationController;
-    // private MotorController motorController = new MotorController();
-    // private FollowPathController followPathController = new FollowPathController();
     private ObstacleAvoidanceController obstacleController;
     private Button button = new Button();
 
@@ -16,74 +14,71 @@ public class BehaviourHandler
         this.obstacleController.start();
     }
 
-    //TODO prima di richiamare questo metodo controllare che ci sia abbastanza carica per fare tutto
-    public boolean serveTea() {
+    public void serveTea() {
         try {
-            //mettere lo stop in FollowPathController
-            // this.followPathController.stop();
 
-            System.out.println("Waiting for a client !");
+            System.out.println(" | Waiting for a client ! | ");
             while(!button.isPressed()) { Thread.sleep(100); }
             Thread.sleep(2000);
             button.setPressed(false);
-            System.out.println("A client is arrived !");
+            System.out.println(" | A client is arrived ! | ");
 
-            System.out.println("Going to the client !");
+            System.out.println(" --> Going to the client !");
             goingToTheClient();
         
-            System.out.println("At table, waiting for orders !");
+            System.out.println(" | At table, waiting for orders ! | ");
             while(! button.isPressed()) { Thread.sleep(100); }
             Thread.sleep(2000);
             button.setPressed(false);
-            System.out.println("The client has choose his tea");
+            System.out.println(" | The client has choose his tea | ");
 
-            System.out.println("Going to bar !");
+            System.out.println(" --> Going to bar !");
             goingToTheBar();
 
-            System.out.println("At bar, waiting for preparation !");
+            System.out.println(" | At bar, waiting for preparation ! | ");
             while(!button.isPressed()) { Thread.sleep(100); }
             Thread.sleep(2000);
             button.setPressed(false);
-            System.out.println("The tea is ready ! ");
+            System.out.println(" | The tea is ready ! | ");
 
-            System.out.println("Going back to client to delivery the tea !");
+            System.out.println("--> Going back to client to delivery the tea !");
             goingToTheClient();
 
-            System.out.println("At client, waiting for him to retrieve his tea !");
+            System.out.println(" | At client, waiting for him to retrieve his tea ! | ");
             while(!button.isPressed()) { Thread.sleep(100); }
             Thread.sleep(2000);
             button.setPressed(false);
-            System.out.println("The client has retrieve the tea !");
+            System.out.println(" | The client has retrieve the tea ! | ");
 
-            System.out.println("Going to wait for the client to finish his tea !");
+            System.out.println("--> Going to wait for the client to finish his tea !");
             goingToTheChargeStation();
 
-            System.out.println("At charge station, waiting for the client to finish his tea !");
+            System.out.println(" | At charge station, waiting for the client to finish his tea ! | ");
             while(!button.isPressed()) { Thread.sleep(100); }
             Thread.sleep(2000);
             button.setPressed(false);
-            System.out.println("The client has finish his tea !");
+            System.out.println(" | The client has finish his tea ! | ");
 
-            System.out.println("Going back to client to receive the empty cup !");
+            System.out.println(" --> Going back to client to receive the empty cup !");
             goingToTheClient();
 
-            System.out.println("At client, waiting for him to receive his empty cup !");
+            System.out.println(" | At client, waiting for him to receive his empty cup ! | ");
             while(!button.isPressed()) { Thread.sleep(100); }
             Thread.sleep(2000);
             button.setPressed(false);
-            System.out.println("Received the empty cup !");
-            System.out.println("Thank you for choosing us and see you soon !");
+            System.out.println(" | Received the empty cup ! | ");
+            System.out.println(" | Thank you for choosing us and see you soon ! | ");
 
-            System.out.println("Going to bar !");
+            System.out.println(" --> Going to bar !");
             goingToTheBar();
 
-            System.out.println("At bar, waiting for give back the empty cup !");
+            System.out.println(" | At bar, waiting for give back the empty cup ! | ");
             while(!button.isPressed()) { Thread.sleep(100); }
             Thread.sleep(2000);
             button.setPressed(false);
-            System.out.println("The empty cup has been taken ! ");
+            System.out.println(" | The empty cup has been taken ! | ");
 
-            System.out.println("Going to wait for a new client !");
+            System.out.println(" --> Going to wait for a new client !");
             goingToTheChargeStation();
 
             return true;
@@ -99,38 +94,29 @@ public class BehaviourHandler
         System.out.println("Going to client...");
         this.attempt = 0;
         this.obstacleController.startMoving();
-        // System.out.println("isArrested :" + this.motorController.isRobotArrested());
         while(this.obstacleController.isStarted()) { 
             try {
-                // System.out.println("now isArrested ? " + this.motorController.isRobotArrested());
                 Thread.sleep(100); 
             } catch (InterruptedException ex) {} 
         }
         System.out.println("now isArrested ? " + ! this.obstacleController.isStarted());
         this.location = this.locationController.getLocation();
         System.out.println("location :" + this.location);
-        // System.out.println("getLocation :" + this.locationController.getLocation());
 
         while(!this.location.equals("CLIENT'S TABLE")){
             if(this.location.equals("UNKNOWN")) {
                 checkLocation();
                 
-                // System.out.println("ho finito la checklocation");
-                // System.out.println(this.attempt);
+                System.out.println(this.attempt);
                 if ( this.attempt >= 2){
                     
-                    // System.out.println("Sono dentro all'if");
                     this.attempt = 0;
                     goingToTheClient();
                 }
             } else {
-                // System.out.println("Sono dentro all'else");
                 goingToTheClient();
             }
         }
-        // System.out.println("Sono fuoriiiiiiiiiiiiiiiiiiiiiiiiiiii");
-
-        // System.out.println("Sono nel posto giusto, esco " + this.location);
     }
 
     private void checkLocation() {
@@ -141,15 +127,12 @@ public class BehaviourHandler
             try{
                 Thread.sleep(500);
                 this.location = this.locationController.getLocation();
-                // System.out.println("check Location :" + this.locationController.getLocation());
                 if(this.location.equals("UNKNOWN")) {
                     this.attempt = this.attempt +1;
                     checkLocation();
                 }
             }   catch(InterruptedException ex) {}
         }
-
-        // System.out.println("Sono fuori dall'if");
     }
 
     private void goingToTheBar() {
