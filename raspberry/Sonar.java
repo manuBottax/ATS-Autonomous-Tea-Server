@@ -11,7 +11,8 @@ import com.pi4j.io.gpio.PinState;
 public class Sonar
 {
 
-    private final static float SOUND_SPEED = 340.29f;  // speed of sound in m/s
+    // private final static float SOUND_SPEED = 340.27f;  // speed of sound in m/s at 15°C at sea level
+    private final static float SOUND_SPEED = 343.21f;  // speed of sound in m/s at 20°C at sea level
     
     private final static int TRIG_DURATION_IN_MICROS = 10; // trigger duration of 10 micro s
     
@@ -39,7 +40,7 @@ public class Sonar
         this.waitForSignal();
         long duration = this.measureSignal();
         
-        return duration * SOUND_SPEED / ( 2 * 10000 );
+        return (duration * SOUND_SPEED) / 10000; // return distance in cm 
     }
 
     /**
