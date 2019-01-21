@@ -29,29 +29,8 @@ public class IRModule
             public void handleGpioPinDigitalStateChangeEvent( GpioPinDigitalStateChangeEvent event) {
                 
                 if (event.getState() == PinState.HIGH){
-                    System.out.println("c'è del nero");
-                    blackOccurance++;
-                    for ( int i = 0; i < 4; i ++) {
-                        try {
-                            Thread.sleep(10);
-                            if (ir.isHigh()){
-                                blackOccurance++;
-                            }
-                        } catch ( InterruptedException ex) {}
-                    }
-
-                    if ( blackOccurance >= 3) {
-                        System.out.print("Black Occurence : " + blackOccurance + " | ");
-                        System.out.println("Sensor " + direction.getDirection() + " ->  Line : Black" );
-                        followPathController.setLineState(direction, true);
-                        
-                    } else {
-                        System.out.println("Sensor " + direction.getDirection() + " -> Line : White" );
-                        followPathController.setLineState(direction, false);
-                    }
-
-                    blackOccurance = 0;
-                    
+                    System.out.println("Sensor " + direction.getDirection() + " ->  Line : Black" );
+                    followPathController.setLineState(direction, true); 
                 } else {
                     System.out.println("Sensor " + direction.getDirection() + " -> Line : White" );
                     followPathController.setLineState(direction, false);

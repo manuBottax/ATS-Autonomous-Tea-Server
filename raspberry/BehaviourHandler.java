@@ -14,7 +14,7 @@ public class BehaviourHandler
         this.obstacleController.start();
     }
 
-    public void serveTea() {
+    public boolean serveTea() {
         try {
 
             System.out.println(" | Waiting for a client ! | ");

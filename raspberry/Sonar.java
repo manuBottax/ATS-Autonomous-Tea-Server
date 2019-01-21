@@ -36,8 +36,10 @@ public class Sonar
     }
 
     public float measureDistance() {
+        // sense environment for obstacle
         this.triggerSensor();
         this.waitForSignal();
+        //compute time
         long duration = this.measureSignal();
         
         return (duration * SOUND_SPEED) / 10000; // return distance in cm 

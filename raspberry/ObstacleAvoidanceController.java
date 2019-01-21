@@ -3,7 +3,7 @@ import java.io.InterruptedIOException;
 
 public class ObstacleAvoidanceController extends Thread{
 
-    private static final int MIN_DISTANCE_ALLOWED = 15;
+    private static final int MIN_DISTANCE_ALLOWED = 20;
     private boolean obstacle = false;
     private Sonar sonar;
     private FollowPathController pathController;
@@ -31,6 +31,7 @@ public class ObstacleAvoidanceController extends Thread{
 
     private boolean hasObstacle() {
         float distance = this.sonar.measureDistance(); 
+        System.out.println("distance: " + distance);
         if (distance <= MIN_DISTANCE_ALLOWED ) {
             System.out.println("Obstacle, stop ! ");
             return true;
